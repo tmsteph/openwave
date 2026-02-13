@@ -1,0 +1,843 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta name="color-scheme" content="dark light" />
+  <title>Open Wave — Open technology services for serious teams</title>
+  <meta name="description" content="Open Wave runs parallel to 3dvr.tech: a professional, open-standards-first studio for websites, apps, automation, and systems. Calm UX. Solid engineering. Built to last." />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Open Wave" />
+  <meta property="og:description" content="Professional open technology services. Websites, apps, automation, and systems — built on open standards." />
+  <meta property="og:type" content="website" />
+
+  <meta name="theme-color" content="#0b1220" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 128 128'%3E%3Cdefs%3E%3CradialGradient id='g' cx='35%25' cy='30%25' r='80%25'%3E%3Cstop offset='0%25' stop-color='%23ffffff' stop-opacity='.95'/%3E%3Cstop offset='35%25' stop-color='%2367e8f9' stop-opacity='.85'/%3E%3Cstop offset='100%25' stop-color='%231d4ed8' stop-opacity='.85'/%3E%3C/radialGradient%3E%3C/defs%3E%3Cpath d='M20 70c20-28 44-42 72-42 8 0 14 1 18 2-10 5-20 14-28 26-18 26-42 44-72 44-6 0-12-1-18-3 10-5 20-14 28-27Z' fill='url(%23g)'/%3E%3Cpath d='M18 90c8 4 16 6 24 6 40 0 70-34 86-62 2 3 3 6 3 10 0 36-30 72-76 72-15 0-28-4-37-10Z' fill='%23ffffff' fill-opacity='.12'/%3E%3C/svg%3E" />
+
+  <style>
+    :root{
+      --bg0:#070b14;
+      --bg1:#0b1220;
+      --card:#0e1830cc;
+      --stroke:#2a3553;
+      --muted:#a7b1c7;
+      --text:#e9eefc;
+      --brand0:#67e8f9; /* cyan */
+      --brand1:#3b82f6; /* blue */
+      --brand2:#a78bfa; /* violet */
+      --ok:#34d399;
+      --warn:#fbbf24;
+
+      --shadow: 0 16px 48px rgba(0,0,0,.55);
+      --shadowSoft: 0 10px 28px rgba(0,0,0,.35);
+      --r-xl: 22px;
+      --r-lg: 18px;
+      --r-md: 14px;
+
+      --max: 1120px;
+      --pad: clamp(16px, 3.5vw, 36px);
+      --gap: clamp(14px, 2.4vw, 26px);
+
+      --fs-hero: clamp(34px, 4.6vw, 56px);
+      --fs-h2: clamp(22px, 2.6vw, 34px);
+      --fs-p: clamp(15px, 1.25vw, 17px);
+      --lh: 1.55;
+    }
+
+    @media (prefers-color-scheme: light){
+      :root{
+        --bg0:#f7f9ff;
+        --bg1:#ffffff;
+        --card:#ffffffcc;
+        --stroke:#d8e0f2;
+        --muted:#4b556b;
+        --text:#0a1020;
+        --shadow: 0 18px 44px rgba(6,10,26,.10);
+        --shadowSoft: 0 10px 26px rgba(6,10,26,.08);
+      }
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans", "Liberation Sans", sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(1200px 700px at 20% 10%, rgba(103,232,249,.22), transparent 55%),
+        radial-gradient(900px 600px at 85% 20%, rgba(167,139,250,.20), transparent 55%),
+        radial-gradient(1000px 800px at 60% 110%, rgba(59,130,246,.18), transparent 60%),
+        linear-gradient(180deg, var(--bg0), var(--bg1));
+      line-height:var(--lh);
+      letter-spacing: .2px;
+      overflow-x:hidden;
+    }
+
+    a{color:inherit; text-decoration:none}
+    a:hover{opacity:.95}
+    .wrap{max-width:var(--max); margin:0 auto; padding: var(--pad)}
+    .row{display:flex; gap:var(--gap)}
+    .col{flex:1}
+    .muted{color:var(--muted)}
+    .pill{
+      display:inline-flex; align-items:center; gap:10px;
+      padding: 10px 12px;
+      border-radius:999px;
+      border:1px solid color-mix(in srgb, var(--stroke), transparent 20%);
+      background: color-mix(in srgb, var(--card), transparent 15%);
+      box-shadow: var(--shadowSoft);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      font-size: 13px;
+      white-space: nowrap;
+    }
+    .dot{
+      width:10px; height:10px; border-radius:999px;
+      background: linear-gradient(135deg, var(--brand0), var(--brand1));
+      box-shadow: 0 0 0 4px rgba(103,232,249,.14);
+    }
+
+    /* Header */
+    header{
+      position:sticky; top:0; z-index:20;
+      background: color-mix(in srgb, var(--bg1), transparent 35%);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid color-mix(in srgb, var(--stroke), transparent 35%);
+    }
+    .nav{
+      display:flex; align-items:center; justify-content:space-between;
+      gap:16px;
+      padding: 12px var(--pad);
+      max-width:var(--max); margin:0 auto;
+    }
+    .brand{
+      display:flex; align-items:center; gap:12px; min-width: 220px;
+    }
+    .brand .name{
+      display:flex; flex-direction:column; line-height:1.1;
+    }
+    .brand strong{font-weight: 750; letter-spacing: .3px}
+    .brand small{font-size:12px; color:var(--muted)}
+    .navlinks{
+      display:flex; align-items:center; gap:10px;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+    }
+    .navlinks a{
+      padding:10px 10px;
+      border-radius: 12px;
+      color: color-mix(in srgb, var(--text), var(--muted) 25%);
+      border: 1px solid transparent;
+    }
+    .navlinks a:hover{
+      border-color: color-mix(in srgb, var(--stroke), transparent 10%);
+      background: color-mix(in srgb, var(--card), transparent 20%);
+    }
+
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center; gap:10px;
+      padding: 12px 14px;
+      border-radius: 14px;
+      border:1px solid color-mix(in srgb, var(--stroke), transparent 15%);
+      background: color-mix(in srgb, var(--card), transparent 10%);
+      box-shadow: var(--shadowSoft);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      font-weight: 650;
+      font-size: 14px;
+      cursor:pointer;
+      user-select:none;
+    }
+    .btn.primary{
+      border-color: color-mix(in srgb, var(--brand1), var(--stroke) 35%);
+      background:
+        linear-gradient(135deg, rgba(103,232,249,.18), rgba(59,130,246,.20)),
+        color-mix(in srgb, var(--card), transparent 8%);
+    }
+    .btn.primary:hover{transform: translateY(-1px)}
+    .btn:active{transform: translateY(0px); opacity:.96}
+    .btn .arr{opacity:.9}
+    .btn.tiny{padding:10px 12px; border-radius: 12px; font-size: 13px}
+
+    /* Hero */
+    .hero{
+      padding: clamp(28px, 6vw, 64px) 0 22px 0;
+    }
+    .heroGrid{
+      display:grid;
+      grid-template-columns: 1.25fr .85fr;
+      gap: clamp(18px, 3vw, 34px);
+      align-items: start;
+    }
+    .h1{
+      font-size: var(--fs-hero);
+      line-height: 1.06;
+      letter-spacing: -0.8px;
+      margin: 12px 0 14px 0;
+    }
+    .lead{font-size: clamp(16px, 1.7vw, 19px); color: color-mix(in srgb, var(--text), var(--muted) 30%); margin:0 0 18px 0}
+    .heroCard{
+      border-radius: var(--r-xl);
+      border: 1px solid color-mix(in srgb, var(--stroke), transparent 10%);
+      background: color-mix(in srgb, var(--card), transparent 5%);
+      box-shadow: var(--shadow);
+      padding: clamp(16px, 2.8vw, 22px);
+      position: relative;
+      overflow:hidden;
+    }
+    .heroCard::before{
+      content:"";
+      position:absolute; inset:-2px;
+      background:
+        radial-gradient(900px 400px at 25% 10%, rgba(103,232,249,.22), transparent 60%),
+        radial-gradient(800px 420px at 90% 30%, rgba(167,139,250,.18), transparent 60%),
+        linear-gradient(180deg, transparent, rgba(0,0,0,.06));
+      pointer-events:none;
+      mix-blend-mode: normal;
+    }
+    .heroCard > *{position:relative}
+    .heroActions{display:flex; gap:12px; flex-wrap:wrap; margin-top:18px}
+
+    .kpiGrid{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:12px;
+      margin-top: 14px;
+    }
+    .kpi{
+      border-radius: 16px;
+      border: 1px solid color-mix(in srgb, var(--stroke), transparent 15%);
+      background: color-mix(in srgb, var(--card), transparent 15%);
+      padding: 12px 12px;
+    }
+    .kpi strong{display:block; font-size: 18px; letter-spacing:-.3px}
+    .kpi span{display:block; font-size: 12px; color:var(--muted); margin-top:4px}
+
+    /* Sections */
+    section{padding: 22px 0}
+    .sectionTitle{
+      display:flex; align-items:flex-end; justify-content:space-between;
+      gap: 12px; flex-wrap:wrap;
+      margin-bottom: 12px;
+    }
+    h2{
+      margin:0;
+      font-size: var(--fs-h2);
+      letter-spacing: -0.4px;
+      line-height: 1.15;
+    }
+    .sub{margin:0; color:var(--muted); font-size: var(--fs-p)}
+    .grid3{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--gap);
+    }
+    .grid2{
+      display:grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--gap);
+    }
+    .card{
+      border-radius: var(--r-xl);
+      border: 1px solid color-mix(in srgb, var(--stroke), transparent 10%);
+      background: color-mix(in srgb, var(--card), transparent 5%);
+      box-shadow: var(--shadowSoft);
+      padding: clamp(14px, 2.2vw, 18px);
+      overflow:hidden;
+      position: relative;
+    }
+    .card::after{
+      content:"";
+      position:absolute; inset:0;
+      background: radial-gradient(700px 260px at 15% 0%, rgba(103,232,249,.12), transparent 60%);
+      pointer-events:none;
+      opacity:.65;
+    }
+    .card > *{position:relative}
+    .card h3{margin: 2px 0 6px 0; font-size: 16px; letter-spacing:-.2px}
+    .card p{margin:0; color: color-mix(in srgb, var(--text), var(--muted) 38%); font-size: var(--fs-p)}
+    .tagRow{display:flex; flex-wrap:wrap; gap:8px; margin-top:12px}
+    .tag{
+      font-size: 12px;
+      padding: 7px 10px;
+      border-radius:999px;
+      border:1px solid color-mix(in srgb, var(--stroke), transparent 15%);
+      background: color-mix(in srgb, var(--card), transparent 20%);
+      color: color-mix(in srgb, var(--text), var(--muted) 30%);
+    }
+
+    .list{
+      margin: 12px 0 0 0;
+      padding:0;
+      list-style:none;
+      display:grid;
+      gap:10px;
+    }
+    .li{
+      display:flex; gap:10px; align-items:flex-start;
+      border-radius: 16px;
+      padding: 10px 10px;
+      border: 1px solid color-mix(in srgb, var(--stroke), transparent 20%);
+      background: color-mix(in srgb, var(--card), transparent 20%);
+    }
+    .check{
+      width:18px; height:18px; border-radius: 6px;
+      background: linear-gradient(135deg, rgba(52,211,153,.25), rgba(103,232,249,.18));
+      border: 1px solid color-mix(in srgb, var(--ok), var(--stroke) 60%);
+      margin-top: 2px;
+      flex: 0 0 auto;
+      position:relative;
+    }
+    .check::after{
+      content:"";
+      position:absolute; left:5px; top:4px;
+      width:6px; height:9px;
+      border-right:2px solid color-mix(in srgb, var(--text), transparent 10%);
+      border-bottom:2px solid color-mix(in srgb, var(--text), transparent 10%);
+      transform: rotate(40deg);
+      opacity:.9;
+    }
+
+    /* CTA band */
+    .cta{
+      border-radius: calc(var(--r-xl) + 6px);
+      border: 1px solid color-mix(in srgb, var(--stroke), transparent 10%);
+      background:
+        radial-gradient(900px 300px at 20% 10%, rgba(103,232,249,.18), transparent 60%),
+        radial-gradient(900px 360px at 90% 30%, rgba(167,139,250,.16), transparent 60%),
+        color-mix(in srgb, var(--card), transparent 2%);
+      box-shadow: var(--shadow);
+      padding: clamp(16px, 3vw, 22px);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 14px;
+      flex-wrap:wrap;
+    }
+    .cta strong{font-size: 18px; letter-spacing:-.2px}
+    .cta .muted{max-width: 60ch}
+
+    /* Footer */
+    footer{
+      padding: 26px 0 36px 0;
+      border-top: 1px solid color-mix(in srgb, var(--stroke), transparent 30%);
+      margin-top: 14px;
+    }
+    .foot{
+      display:flex; align-items:flex-start; justify-content:space-between;
+      gap: var(--gap);
+      flex-wrap:wrap;
+    }
+    .foot small{color: var(--muted)}
+    .foot a{color: color-mix(in srgb, var(--text), var(--muted) 22%)}
+    .foot a:hover{color: var(--text)}
+    .mono{
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+      font-size: 12px;
+      color: color-mix(in srgb, var(--text), var(--muted) 30%);
+      padding: 8px 10px;
+      border-radius: 12px;
+      border: 1px solid color-mix(in srgb, var(--stroke), transparent 15%);
+      background: color-mix(in srgb, var(--card), transparent 20%);
+      overflow-x:auto;
+      max-width: 100%;
+    }
+
+    /* Responsive */
+    @media (max-width: 980px){
+      .heroGrid{grid-template-columns: 1fr}
+      .brand{min-width: unset}
+      .grid3{grid-template-columns: 1fr}
+      .grid2{grid-template-columns: 1fr}
+    }
+    @media (max-width: 420px){
+      .navlinks{gap:6px}
+      .navlinks a{padding:10px 8px}
+      .pill{max-width: 100%; overflow:hidden; text-overflow: ellipsis}
+    }
+    @media (min-width: 1400px){
+      :root{--max: 1220px;}
+    }
+
+    /* Motion accessibility */
+    @media (prefers-reduced-motion: reduce){
+      *{scroll-behavior:auto !important; transition:none !important; animation:none !important}
+      .btn.primary:hover{transform:none}
+    }
+
+    /* Tiny utility */
+    .sr-only{
+      position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0;
+    }
+  </style>
+</head>
+
+<body>
+<header>
+  <nav class="nav" aria-label="Primary">
+    <a class="brand" href="#top" aria-label="Open Wave home">
+      <!-- SVG LOGO (inline, scalable, crisp) -->
+      <svg width="44" height="44" viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Open Wave logo">
+        <defs>
+          <radialGradient id="ow_g" cx="35%" cy="30%" r="80%">
+            <stop offset="0%" stop-color="currentColor" stop-opacity=".95"/>
+            <stop offset="35%" stop-color="var(--brand0)" stop-opacity=".90"/>
+            <stop offset="100%" stop-color="var(--brand1)" stop-opacity=".90"/>
+          </radialGradient>
+          <linearGradient id="ow_s" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="var(--brand0)" stop-opacity=".95"/>
+            <stop offset="55%" stop-color="var(--brand1)" stop-opacity=".95"/>
+            <stop offset="100%" stop-color="var(--brand2)" stop-opacity=".95"/>
+          </linearGradient>
+          <filter id="ow_glow" x="-40%" y="-40%" width="180%" height="180%">
+            <feGaussianBlur stdDeviation="3.5" result="b"/>
+            <feColorMatrix in="b" type="matrix"
+              values="1 0 0 0 0
+                      0 1 0 0 0
+                      0 0 1 0 0
+                      0 0 0 .55 0" result="c"/>
+            <feMerge>
+              <feMergeNode in="c"/>
+              <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+          </filter>
+        </defs>
+
+        <!-- mark -->
+        <path d="M20 70c20-28 44-42 72-42 8 0 14 1 18 2-10 5-20 14-28 26-18 26-42 44-72 44-6 0-12-1-18-3 10-5 20-14 28-27Z"
+              fill="url(#ow_g)" filter="url(#ow_glow)"/>
+        <path d="M18 90c8 4 16 6 24 6 40 0 70-34 86-62 2 3 3 6 3 10 0 36-30 72-76 72-15 0-28-4-37-10Z"
+              fill="currentColor" fill-opacity=".12"/>
+        <path d="M14 96c12 10 28 16 46 16 34 0 60-20 74-46" fill="none" stroke="url(#ow_s)" stroke-width="6" stroke-linecap="round" opacity=".55"/>
+      </svg>
+
+      <span class="name">
+        <strong>Open Wave</strong>
+        <small>Professional open technology</small>
+      </span>
+    </a>
+
+    <div class="navlinks">
+      <a href="#services">Services</a>
+      <a href="#approach">Approach</a>
+      <a href="#work">Work</a>
+      <a href="#contact">Contact</a>
+      <a class="btn tiny primary" href="#contact">
+        Start a project <span class="arr">→</span>
+      </a>
+    </div>
+  </nav>
+</header>
+
+<main id="top" class="wrap">
+  <section class="hero" aria-label="Hero">
+    <div class="pill" style="margin-bottom: 14px;">
+      <span class="dot" aria-hidden="true"></span>
+      <span><strong>Open Wave</strong> runs parallel to <span class="muted">3dvr.tech</span> — same team, sharper positioning.</span>
+    </div>
+
+    <div class="heroGrid">
+      <div class="heroCard">
+        <h1 class="h1">
+          Calm, professional delivery —
+          <span style="background: linear-gradient(135deg, var(--brand0), var(--brand1), var(--brand2));
+                       -webkit-background-clip:text; background-clip:text; color:transparent;">
+            built on open standards.
+          </span>
+        </h1>
+
+        <p class="lead">
+          Open Wave is the serious front door for clients who want clarity, reliability, and modern engineering —
+          without the “3D/VR” confusion. We build websites, apps, automation, and systems that last.
+        </p>
+
+        <div class="heroActions">
+          <a class="btn primary" href="#contact">Request a quote <span class="arr">→</span></a>
+          <a class="btn" href="#services">See what we do</a>
+          <a class="btn" href="#work" title="Examples and formats">How we ship</a>
+        </div>
+
+        <div class="kpiGrid" aria-label="Key points">
+          <div class="kpi">
+            <strong>Open-first</strong>
+            <span>No vendor lock-in. Portable systems.</span>
+          </div>
+          <div class="kpi">
+            <strong>Mobile-ready</strong>
+            <span>Great on narrow & ultra-wide screens.</span>
+          </div>
+          <div class="kpi">
+            <strong>Fast & accessible</strong>
+            <span>Performance, a11y, and calm UX by default.</span>
+          </div>
+          <div class="kpi">
+            <strong>Practical scope</strong>
+            <span>Clear milestones, timelines, and handoff.</span>
+          </div>
+        </div>
+      </div>
+
+      <aside class="heroCard" aria-label="Quick facts">
+        <h3 style="margin:0 0 6px 0; font-size:16px; letter-spacing:-.2px;">What “Open Wave” means</h3>
+        <p class="muted" style="margin:0 0 10px 0; font-size: var(--fs-p);">
+          Open tech that spreads — steadily, safely, and professionally — like a wave.
+        </p>
+
+        <ul class="list">
+          <li class="li">
+            <span class="check" aria-hidden="true"></span>
+            <div>
+              <strong>Same builders as 3dvr</strong><br/>
+              <span class="muted">A parallel brand for serious, traditional clients.</span>
+            </div>
+          </li>
+          <li class="li">
+            <span class="check" aria-hidden="true"></span>
+            <div>
+              <strong>Modern web + real systems</strong><br/>
+              <span class="muted">From landing pages to portals, dashboards, and automation.</span>
+            </div>
+          </li>
+          <li class="li">
+            <span class="check" aria-hidden="true"></span>
+            <div>
+              <strong>Human support</strong><br/>
+              <span class="muted">Clear communication, organized delivery, clean documentation.</span>
+            </div>
+          </li>
+        </ul>
+
+        <div class="tagRow" aria-label="Capabilities">
+          <span class="tag">Websites</span>
+          <span class="tag">Web Apps</span>
+          <span class="tag">Automation</span>
+          <span class="tag">UX / UI</span>
+          <span class="tag">Open-source</span>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <section id="services" aria-label="Services">
+    <div class="sectionTitle">
+      <div>
+        <h2>Services</h2>
+        <p class="sub">A professional menu — with open, maintainable foundations.</p>
+      </div>
+      <a class="btn tiny" href="#contact">Get pricing <span class="arr">→</span></a>
+    </div>
+
+    <div class="grid3">
+      <article class="card">
+        <h3>Websites that convert</h3>
+        <p>
+          High-performing marketing sites, landing pages, and content hubs with clean design, fast load times,
+          and a strong CTA strategy.
+        </p>
+        <div class="tagRow">
+          <span class="tag">SEO-ready</span>
+          <span class="tag">Performance</span>
+          <span class="tag">Mobile-first</span>
+        </div>
+      </article>
+
+      <article class="card">
+        <h3>Web apps & portals</h3>
+        <p>
+          Internal tools, client portals, dashboards, and subscription experiences — structured, secure,
+          and designed for daily use.
+        </p>
+        <div class="tagRow">
+          <span class="tag">Auth</span>
+          <span class="tag">Dashboards</span>
+          <span class="tag">Payments</span>
+        </div>
+      </article>
+
+      <article class="card">
+        <h3>Automation & integration</h3>
+        <p>
+          Reduce busywork: forms → CRM, email workflows, reporting, data pipelines, and APIs.
+          Practical wins that pay for themselves.
+        </p>
+        <div class="tagRow">
+          <span class="tag">Webhooks</span>
+          <span class="tag">Email</span>
+          <span class="tag">Ops</span>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section id="approach" aria-label="Approach">
+    <div class="sectionTitle">
+      <div>
+        <h2>Approach</h2>
+        <p class="sub">Professional process, minimal drama — measurable outcomes.</p>
+      </div>
+    </div>
+
+    <div class="grid2">
+      <article class="card">
+        <h3>1) Diagnose</h3>
+        <p>We start with goals, constraints, audience, and “definition of done”. You’ll get a written plan and a clear scope.</p>
+        <ul class="list">
+          <li class="li"><span class="check" aria-hidden="true"></span><div><strong>Clarity first</strong><br/><span class="muted">We reduce ambiguity before writing code.</span></div></li>
+          <li class="li"><span class="check" aria-hidden="true"></span><div><strong>Open standards</strong><br/><span class="muted">Portable choices, fewer dead ends.</span></div></li>
+        </ul>
+      </article>
+
+      <article class="card">
+        <h3>2) Design</h3>
+        <p>Calm, professional UI that works on extremely narrow phones and ultra-wide monitors.</p>
+        <ul class="list">
+          <li class="li"><span class="check" aria-hidden="true"></span><div><strong>Responsive by default</strong><br/><span class="muted">No broken layouts on edge-case screens.</span></div></li>
+          <li class="li"><span class="check" aria-hidden="true"></span><div><strong>Accessibility</strong><br/><span class="muted">Legible, high-contrast, reduced motion options.</span></div></li>
+        </ul>
+      </article>
+
+      <article class="card">
+        <h3>3) Build</h3>
+        <p>Clean implementation, documented handoff, and predictable milestones.</p>
+        <ul class="list">
+          <li class="li"><span class="check" aria-hidden="true"></span><div><strong>Performance</strong><br/><span class="muted">Fast pages, efficient assets, clean code.</span></div></li>
+          <li class="li"><span class="check" aria-hidden="true"></span><div><strong>Maintainability</strong><br/><span class="muted">Readable structure, versioned delivery.</span></div></li>
+        </ul>
+      </article>
+
+      <article class="card">
+        <h3>4) Support</h3>
+        <p>Launch is the start: updates, improvements, and reliable long-term help.</p>
+        <ul class="list">
+          <li class="li"><span class="check" aria-hidden="true"></span><div><strong>Human support</strong><br/><span class="muted">Clear communication, real follow-through.</span></div></li>
+          <li class="li"><span class="check" aria-hidden="true"></span><div><strong>Growth path</strong><br/><span class="muted">Roadmaps, experiments, iteration cycles.</span></div></li>
+        </ul>
+      </article>
+    </div>
+  </section>
+
+  <section id="work" aria-label="Work formats">
+    <div class="sectionTitle">
+      <div>
+        <h2>What we deliver</h2>
+        <p class="sub">Pick a lane — or combine them. Everything is documented.</p>
+      </div>
+    </div>
+
+    <div class="grid3">
+      <article class="card">
+        <h3>Launch-ready site</h3>
+        <p>Single page or multi-page website, copy polish, CTA flow, performance tuning, and analytics setup.</p>
+        <div class="tagRow">
+          <span class="tag">1–2 weeks</span>
+          <span class="tag">Copy + design</span>
+          <span class="tag">Deploy</span>
+        </div>
+      </article>
+
+      <article class="card">
+        <h3>Client portal / dashboard</h3>
+        <p>Auth, data views, forms, and workflows. Useful for subscriptions, onboarding, internal ops, or reporting.</p>
+        <div class="tagRow">
+          <span class="tag">2–6 weeks</span>
+          <span class="tag">Auth</span>
+          <span class="tag">Workflows</span>
+        </div>
+      </article>
+
+      <article class="card">
+        <h3>Automation sprint</h3>
+        <p>We identify bottlenecks and wire up integrations: email, webhooks, reports, and “no more copy/paste”.</p>
+        <div class="tagRow">
+          <span class="tag">3–7 days</span>
+          <span class="tag">High ROI</span>
+          <span class="tag">Documentation</span>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section aria-label="Call to action">
+    <div class="cta">
+      <div>
+        <strong>Ready for a clean, professional build?</strong><br/>
+        <span class="muted">Tell us what you’re trying to accomplish. We’ll reply with a practical plan and next steps.</span>
+      </div>
+      <div style="display:flex; gap:12px; flex-wrap:wrap;">
+        <a class="btn primary" href="#contact">Start a project <span class="arr">→</span></a>
+        <a class="btn" href="#services">Explore services</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" aria-label="Contact">
+    <div class="sectionTitle">
+      <div>
+        <h2>Contact</h2>
+        <p class="sub">Fastest path: send a short brief. We’ll take it from there.</p>
+      </div>
+    </div>
+
+    <div class="grid2">
+      <article class="card">
+        <h3>Quick brief</h3>
+        <p class="muted">Copy/paste this into an email or message. Keep it simple — bullets are perfect.</p>
+        <div class="mono" id="brief">
+Project name:
+Goal (what does success look like?):
+Audience:
+Must-haves:
+Nice-to-haves:
+Deadline:
+Budget range:
+Links/examples:
+Contact info:
+        </div>
+
+        <div class="heroActions" style="margin-top: 14px;">
+          <button class="btn primary" id="copyBrief" type="button">Copy brief <span class="arr">→</span></button>
+          <a class="btn" href="mailto:hello@openwave.3dvr.tech?subject=Open%20Wave%20Project%20Inquiry&body=Project%20name:%0D%0AGoal%20(what%20does%20success%20look%20like?):%0D%0AAudience:%0D%0AMust-haves:%0D%0ANice-to-haves:%0D%0ADeadline:%0D%0ABudget%20range:%0D%0ALinks/examples:%0D%0AContact%20info:%0D%0A">Email us</a>
+        </div>
+
+        <p class="muted" style="margin-top:12px; font-size: 13px;">
+          Note: if you haven’t set up email yet, replace <span class="mono" style="display:inline-block; padding:2px 6px; border-radius:8px;">hello@openwave.3dvr.tech</span>
+          with your preferred inbox.
+        </p>
+      </article>
+
+      <article class="card">
+        <h3>Brand relationship</h3>
+        <p>
+          <strong>Open Wave</strong> is the professional “serious clients” brand.<br/>
+          <span class="muted">3dvr.tech continues as the experimental / community / maker-facing umbrella.</span>
+        </p>
+
+        <ul class="list">
+          <li class="li">
+            <span class="check" aria-hidden="true"></span>
+            <div>
+              <strong>Why clients choose Open Wave</strong><br/>
+              <span class="muted">Clear scope, clean delivery, and open foundations.</span>
+            </div>
+          </li>
+          <li class="li">
+            <span class="check" aria-hidden="true"></span>
+            <div>
+              <strong>When 3dvr shows up</strong><br/>
+              <span class="muted">If your project needs the experimental edge — 3D/VR/creative tech.</span>
+            </div>
+          </li>
+          <li class="li">
+            <span class="check" aria-hidden="true"></span>
+            <div>
+              <strong>Same mission</strong><br/>
+              <span class="muted">Open technology that helps people build, own, and maintain their tools.</span>
+            </div>
+          </li>
+        </ul>
+
+        <div class="tagRow">
+          <a class="tag" href="https://3dvr.tech" target="_blank" rel="noreferrer">Visit 3dvr.tech</a>
+          <span class="tag" title="Suggested subdomain">Host: openwave.3dvr.tech</span>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <footer aria-label="Footer">
+    <div class="foot">
+      <div style="display:flex; flex-direction:column; gap:8px; min-width: 260px;">
+        <div class="brand" style="padding:0;">
+          <svg width="38" height="38" viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <defs>
+              <radialGradient id="ow_g2" cx="35%" cy="30%" r="80%">
+                <stop offset="0%" stop-color="currentColor" stop-opacity=".95"/>
+                <stop offset="35%" stop-color="var(--brand0)" stop-opacity=".90"/>
+                <stop offset="100%" stop-color="var(--brand1)" stop-opacity=".90"/>
+              </radialGradient>
+            </defs>
+            <path d="M20 70c20-28 44-42 72-42 8 0 14 1 18 2-10 5-20 14-28 26-18 26-42 44-72 44-6 0-12-1-18-3 10-5 20-14 28-27Z" fill="url(#ow_g2)"/>
+            <path d="M18 90c8 4 16 6 24 6 40 0 70-34 86-62 2 3 3 6 3 10 0 36-30 72-76 72-15 0-28-4-37-10Z" fill="currentColor" fill-opacity=".12"/>
+          </svg>
+          <span class="name">
+            <strong>Open Wave</strong>
+            <small class="muted">Open technology services</small>
+          </span>
+        </div>
+
+        <small>© <span id="year"></span> Open Wave. Built with open standards.</small>
+        <small class="muted">Parallel brand to 3dvr.tech.</small>
+      </div>
+
+      <div style="display:flex; gap:18px; flex-wrap:wrap; align-items:flex-start;">
+        <div style="min-width: 200px;">
+          <strong style="display:block; margin-bottom:8px;">Explore</strong>
+          <div style="display:grid; gap:8px;">
+            <a href="#services">Services</a>
+            <a href="#approach">Approach</a>
+            <a href="#work">Work formats</a>
+            <a href="#contact">Contact</a>
+          </div>
+        </div>
+
+        <div style="min-width: 240px;">
+          <strong style="display:block; margin-bottom:8px;">Notes</strong>
+          <small class="muted" style="display:block; max-width: 34ch;">
+            This is a single-file landing page (index.html). You can split it later, or keep it ultra-simple for speed.
+          </small>
+        </div>
+      </div>
+    </div>
+  </footer>
+</main>
+
+<script>
+  // Small enhancements only (no frameworks)
+  (function(){
+    const yearEl = document.getElementById('year');
+    if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+    const btn = document.getElementById('copyBrief');
+    const brief = document.getElementById('brief');
+
+    async function copyText(text){
+      try{
+        await navigator.clipboard.writeText(text);
+        return true;
+      }catch(e){
+        // Fallback: selection-based copy
+        try{
+          const range = document.createRange();
+          range.selectNodeContents(brief);
+          const sel = window.getSelection();
+          sel.removeAllRanges();
+          sel.addRange(range);
+          document.execCommand('copy');
+          sel.removeAllRanges();
+          return true;
+        }catch(err){
+          return false;
+        }
+      }
+    }
+
+    if (btn && brief){
+      btn.addEventListener('click', async () => {
+        const ok = await copyText(brief.textContent.trim());
+        const old = btn.textContent;
+        btn.textContent = ok ? "Copied ✓" : "Copy failed";
+        setTimeout(() => (btn.textContent = old), 1200);
+      });
+    }
+
+    // Smooth scroll for in-page anchors (respects reduced motion)
+    const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (!prefersReduced){
+      document.documentElement.style.scrollBehavior = 'smooth';
+    }
+  })();
+</script>
+</body>
+</html>
